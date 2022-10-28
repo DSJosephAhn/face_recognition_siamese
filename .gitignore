@@ -131,3 +131,6 @@ dmypy.json
 
 ## user_created folder
 dataset
+.face_siamese
+pair
+models

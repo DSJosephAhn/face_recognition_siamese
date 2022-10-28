@@ -3,16 +3,17 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+import cv2
 import tensorflow as tf
 
 
 #### dataset 하나로 만들고, 라벨 붙이기
-def dataset_extractor():
+def dataset_extractor(image_scale):
     folders= os.listdir('lfw')
     img_list, label_list= [], []
     for i in range(len(folders)):
         for j in range(len(os.listdir(os.path.join('lfw', folders[i])))):
-            img_list.append(plt.imread(os.path.join('lfw', folders[i], os.listdir(os.path.join('lfw', folders[i]))[j])))
+            img_list.append(cv2.imread(os.path.join('lfw', folders[i], os.listdir(os.path.join('lfw', folders[i]))[j]), image_scale))
             label_list.append('_'.join(os.listdir(os.path.join('lfw', folders[i]))[j].split('_')[:2]))
         print(i, "th image dataset has been extracted!")
 
@@ -22,7 +23,6 @@ def dataset_extractor():
     label_dataset= np.array(label_list)
     np.save('dataset/img', img_dataset)
     np.save('dataset/label', label_dataset)
-
 
 ### making pairs for training
 def create_pairs(images, labels):

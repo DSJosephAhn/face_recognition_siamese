@@ -4,6 +4,7 @@ matplotlib
 seaborn
 
 ipykernel 
+opencv-python
 
 scikit-learn
 
